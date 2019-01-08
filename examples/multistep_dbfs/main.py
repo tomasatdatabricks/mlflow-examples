@@ -80,7 +80,7 @@ def workflow(als_max_iter, keras_hidden_units):
         os.environ['SPARK_CONF_DIR'] = os.path.abspath('.')
         source_version = active_run.info.source_version
         #ratings_csv_uri = os.path.join(load_raw_data_run.info.artifact_uri, "ratings-csv-dir")
-        etl_data_run = _get_or_run("etl_data", source_version)
+        etl_data_run = _get_or_run("etl_data", {}, source_version)
         ratings_parquet_uri = os.path.join(etl_data_run.info.artifact_uri, "ratings-parquet-dir")
 
         # We specify a spark-defaults.conf to override the default driver memory. ALS requires
