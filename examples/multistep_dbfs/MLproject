@@ -1,15 +1,10 @@
-name: multistep_example
+name: multistep_dbfs_example
 
 conda_env: conda.yaml
 
 entry_points:
-  load_raw_data:
-    command: "python load_raw_data.py"
-
   etl_data:
-    parameters:
-      ratings_csv: path
-    command: "python etl_data.py --ratings-csv {ratings_csv}"
+    command: "python etl_data.py"
 
   als:
     parameters:
