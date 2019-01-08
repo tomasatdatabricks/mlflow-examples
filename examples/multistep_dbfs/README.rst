@@ -13,14 +13,9 @@ by @brookewenig and @smurching.
 
 .. image:: ../../docs/source/_static/images/tutorial-multistep-workflow.png?raw=true
 
-There are four steps to this workflow:
+There are 3 steps to this workflow, modified from the existing MLflow example with 4 steps (removed loading data from a local file and used DBFS instead):
 
-- **load_raw_data.py**: Downloads the MovieLens dataset
-  (a set of triples of user id, movie id, and rating) as a CSV and puts
-  it into the artifact store.
-
-- **etl_data.py**: Converts the MovieLens CSV from the 
-  previous step into Parquet, dropping unnecessary columns along the way.
+- **etl_data.py**: Converts the MovieLens CSV from DBFS into Parquet, dropping unnecessary columns along the way.
   This reduces the input size from 500 MB to 49 MB, and allows columnar 
   access of the data.
 
@@ -42,14 +37,11 @@ reuse the cached results.
 Running this Example
 ^^^^^^^^^^^^^^^^^^^^
 In order for the multistep workflow to find the other steps, you must
-execute ``mlflow run`` from this directory. So, in order to find out if
-the Keras model does in fact improve upon the ALS model, you can simply
-run:
+execute ``mlflow run`` pointing to the GitHub repo location in the run command below:
 
 .. code::
 
-    cd examples/multistep_workflow
-    mlflow run .
+mlflow run git@github.com:rportilla-databricks/mlflow-examples.git#examples/multistep_dbfs/ -P als_max_iter=20 -P keras_hidden_units=50 -m databricks -c cluster.json
 
 
 This will download and transform the MovieLens dataset, train an ALS 
