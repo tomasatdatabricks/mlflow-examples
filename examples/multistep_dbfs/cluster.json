@@ -1,0 +1,9 @@
+{
+    "spark_version": "5.1.x-scala2.11",
+    "node_type_id": "i3.xlarge",
+    "aws_attributes": {
+      "availability": "SPOT"
+    },
+    "spark_env_vars":{"PYSPARK_PYTHON":"/databricks/python3/bin/python3"},
+      "autoscale":{"min_workers":1,"max_workers":2}
+}
