@@ -11,12 +11,8 @@ import os
 import zipfile
 import pyspark
 import mlflow
-import click
 
 
-@click.command(help="Given a CSV file (see load_raw_data), transforms it into Parquet "
-                    "in an mlflow artifact called 'ratings-parquet-dir'")
-#@click.option("--ratings-csv")
 def etl_data():
     with mlflow.start_run() as mlrun:
         # define DBFS path for csv input - persistent
