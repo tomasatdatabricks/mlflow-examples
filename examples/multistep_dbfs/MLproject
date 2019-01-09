@@ -2,7 +2,7 @@ name: multistep_dbfs_example
 
 entry_points:
   etl_data:
-    command: "/databricks/python3/bin/python3 etl_data.py"
+    command: "python etl_data.py"
 
   als:
     parameters:
