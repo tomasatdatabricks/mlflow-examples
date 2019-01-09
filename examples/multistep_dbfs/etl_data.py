@@ -23,7 +23,7 @@ def etl_data():
             .csv(ratings_csv) \
             .drop("timestamp")  # Drop unused column
         ratings_df.show()
-        ratings_df.write.parquet(ratings_parquet_dir)
+        ratings_df.write.mode('overwrite').parquet(ratings_parquet_dir)
 
         print("Uploading Parquet ratings: %s" % ratings_parquet_dir)
         mlflow.log_artifacts(ratings_parquet_dir, "ratings-parquet-dir")
