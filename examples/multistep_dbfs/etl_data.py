@@ -14,8 +14,7 @@ def etl_data():
         ratings_parquet_dir = '/mlflow/ricardo/multistep/parquet/ratings'
      
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
-        #master = "10.0.224.140:7077"
-        #spark = pyspark.sql.SparkSession.builder.master(master).getOrCreate()
+        print('spark context -> ', spark.sparkContext.master) 
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
         ratings_df = spark.read \
             .option("header", "true") \
