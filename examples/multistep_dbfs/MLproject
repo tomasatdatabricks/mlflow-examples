@@ -1,5 +1,7 @@
 name: multistep_dbfs_example
 
+conda_env: conda.yaml
+
 entry_points:
   etl_data:
     command: "python etl_data.py"

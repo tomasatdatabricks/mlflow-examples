@@ -2,9 +2,7 @@
 Converts the raw CSV form to a Parquet form with just the columns we want
 """
 
-
 import mlflow
-
 
 def etl_data():
     with mlflow.start_run() as mlrun:
