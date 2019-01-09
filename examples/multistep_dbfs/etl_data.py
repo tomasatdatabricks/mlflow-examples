@@ -13,7 +13,7 @@ def etl_data():
         # define the DBFS path which we will write parquet to
         ratings_parquet_dir = '/mlflow/ricardo/multistep/parquet/ratings'
      
-        master = "spark://10.0.224.140:7077"
+        master = "10.0.224.140:7077"
         spark = pyspark.sql.SparkSession.builder.master(master).getOrCreate()
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
         ratings_df = spark.read \
