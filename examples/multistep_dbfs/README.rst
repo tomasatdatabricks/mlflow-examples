@@ -36,17 +36,13 @@ reuse the cached results.
 
 Running this Example
 ^^^^^^^^^^^^^^^^^^^^
-In order for the multistep workflow to find the other steps, you must
-execute ``mlflow run`` pointing to the GitHub repo location in the run command below:
+Execute the command below to run one ETL step (see -e <entry point> for the entry point specified from the workflow):
 
 .. code::
 
-mlflow run git@github.com:rportilla-databricks/mlflow-examples.git#examples/multistep_dbfs/ -P als_max_iter=20 -P keras_hidden_units=50 -m databricks -c cluster.json
+mlflow run git@github.com:rportilla-databricks/mlflow-examples.git#examples/multistep_dbfs/ -P als_max_iter=20 -P keras_hidden_units=50 -m databricks -c cluster.json -e etl_data
 
-
-This will download and transform the MovieLens dataset, train an ALS 
-model, and then train a Keras model -- you can compare the results by 
-using ``mlflow ui``!
+The assumption (for this demo) is for the MovieLens dataset to be downloaded to a DBFS bucket. The source DBFS bucket is hardcoded in this example but should be a parameter as a best practice.
 
 You can also try changing the number of ALS iterations or Keras hidden
 units:
