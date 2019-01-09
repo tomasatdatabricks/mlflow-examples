@@ -7,12 +7,12 @@ import pyspark
 
 def etl_data():
 
-print('Secrets list test')
-dbutils.secrets.list('rp_secrets')
+    print('Secrets list test')
+    dbutils.secrets.list('rp_secrets')
 
-print('ETL Start - Get Secret to start...')
-sample_secret = dbutils.get('rp_secrets', 'test_secret')
-print('Sample secret length', len(sample_secret))
+    print('ETL Start - Get Secret to start...')
+    sample_secret = dbutils.get('rp_secrets', 'test_secret')
+    print('Sample secret length', len(sample_secret))
 
     with mlflow.start_run() as mlrun:
         # define DBFS path for csv input - persistent
