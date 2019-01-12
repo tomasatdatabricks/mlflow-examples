@@ -16,7 +16,8 @@ def etl_data():
         import os
         print(os.environ)
         print(os.environ["MASTER"])
-        spark = pyspark.sql.SparkSession.builder.getOrCreate()
+        print(pyspark.sql.SparkSession.builder._options)
+        spark = pyspark.sql.SparkSession.builder.master(os.environ["MASTER"]).getOrCreate()
         print('spark context -> ', spark.sparkContext.master) 
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
         ratings_df = spark.read \
