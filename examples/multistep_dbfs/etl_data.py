@@ -6,7 +6,8 @@ import mlflow
 import pyspark
 
 def etl_data():
-
+    from from sys import version_info
+    print(version_info)
     with mlflow.start_run() as mlrun:
         # define DBFS path for csv input - persistent
         ratings_csv = '/mlflow/ricardo/multistep/csv/ratings.csv'
