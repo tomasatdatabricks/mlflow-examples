@@ -13,7 +13,9 @@ def etl_data():
 
         # define the DBFS path which we will write parquet to
         ratings_parquet_dir = '/mlflow/ricardo/multistep/parquet/ratings'
-     
+        import os
+        print(os.environ)
+        print(os.environ["MASTER"])
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
         print('spark context -> ', spark.sparkContext.master) 
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
