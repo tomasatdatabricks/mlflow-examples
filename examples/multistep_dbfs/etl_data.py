@@ -6,7 +6,7 @@ import mlflow
 import pyspark
 
 def etl_data():
-    from from sys import version_info
+    from sys import version_info
     print(version_info)
     with mlflow.start_run() as mlrun:
         # define DBFS path for csv input - persistent
