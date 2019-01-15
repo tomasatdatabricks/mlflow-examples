@@ -62,7 +62,7 @@ if __name__ == '__main__':
         self._conf = conf
       else:
         print("*** _conf = new conf ***")
-        print("*** old conf =", conf, "***")
+        print("*** old conf =", conf.getAll(), "***")
       do_init(self, *args)
     pyspark.context.SparkContext._do_init = my_init
     etl_data()
