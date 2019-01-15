@@ -61,7 +61,8 @@ if __name__ == '__main__':
         # created and then stopped, and we create a new SparkConf and new SparkContext again)
         self._conf = conf
       else:
-        print("*** _conf = new conf ***")    
+        print("*** _conf = new conf ***")
+        print("*** old conf =", conf, "***")
       do_init(self, *args)
     pyspark.context.SparkContext._do_init = my_init
     etl_data()
