@@ -45,12 +45,13 @@ def my_init(self, conf, **kwargs):
     else:
         print("*** _conf = new conf ***")
         
-    do_init(self, conf=conf, **kwargs)
 
 if __name__ == '__main__':
     print('running main!')
     do_init = pyspark.context.SparkContext._do_init
-    def my_init(self, conf, **kwargs):
+    def my_init(self,  *args):
+      conf = args[7]
+
       # java gateway must have been launched at this point.
       if conf is not None and conf._jconf is not None:
         print("*** _conf = existing conf ***")
@@ -60,5 +61,6 @@ if __name__ == '__main__':
         self._conf = conf
       else:
         print("*** _conf = new conf ***")    
+      do_init(self, *args)
     pyspark.context.SparkContext._do_init = my_init
     etl_data()
