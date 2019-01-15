@@ -51,6 +51,7 @@ if __name__ == '__main__':
     print('running main!')
     do_init = pyspark.context.SparkContext._do_init
     def my_init(self,  *args):
+      print("*** args", args, "***")  
       conf = args[7]
 
       # java gateway must have been launched at this point.
