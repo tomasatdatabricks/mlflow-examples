@@ -21,6 +21,9 @@ def etl_data():
         print(pyspark.sql.SparkSession.builder._options)
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
         print('spark context -> ', spark.sparkContext.master) 
+        import pyspark
+        do_init = pyspark.context.SparkContext._do_init
+       
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
         ratings_df = spark.read \
             .option("header", "true") \
@@ -33,6 +36,32 @@ def etl_data():
         print("Uploading Parquet ratings: %s" % ratings_parquet_dir)
         mlflow.log_artifacts(ratings_parquet_dir, "ratings-parquet-dir")
 
+def my_init(self, conf, **kwargs):
+    # java gateway must have been launched at this point.
+    if conf is not None and conf._jconf is not None:
+        print("*** _conf = existing conf ***")
+        # conf has been initialized in JVM properly, so use conf directly. This represent the
+        # scenario that JVM has been launched before SparkConf is created (e.g. SparkContext is
+        # created and then stopped, and we create a new SparkConf and new SparkContext again)
+        self._conf = conf
+    else:
+        print("*** _conf = new conf ***")
+        
+    do_init(self, conf=conf, **kwargs)
 
 if __name__ == '__main__':
+    print('running main!')
+    import pyspark
+    do_init = pyspark.context.SparkContext._do_init
+    def my_init(self, conf, **kwargs):
+      # java gateway must have been launched at this point.
+      if conf is not None and conf._jconf is not None:
+        print("*** _conf = existing conf ***")
+        # conf has been initialized in JVM properly, so use conf directly. This represent the
+        # scenario that JVM has been launched before SparkConf is created (e.g. SparkContext is
+        # created and then stopped, and we create a new SparkConf and new SparkContext again)
+        self._conf = conf
+      else:
+        print("*** _conf = new conf ***")    
+    pyspark.context.SparkContext._do_init = my_init
     etl_data()
