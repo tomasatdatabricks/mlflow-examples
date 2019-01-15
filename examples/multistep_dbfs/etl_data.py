@@ -1,7 +1,7 @@
 """
 Converts the raw CSV form to a Parquet form with just the columns we want
 """
-
+import os
 import mlflow
 import pyspark
 
@@ -14,14 +14,12 @@ def etl_data():
 
         # define the DBFS path which we will write parquet to
         ratings_parquet_dir = '/mlflow/ricardo/multistep/parquet/ratings'
-        import os
         print(os.environ)
         print(os.environ["MASTER"])
         print([x for x in os.environ.items() if "SPARK" in x[0]])
         print(pyspark.sql.SparkSession.builder._options)
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
         print('spark context -> ', spark.sparkContext.master) 
-        import pyspark
         do_init = pyspark.context.SparkContext._do_init
        
         print("Converting ratings CSV %s to Parquet %s" % (ratings_csv, ratings_parquet_dir))
@@ -51,7 +49,6 @@ def my_init(self, conf, **kwargs):
 
 if __name__ == '__main__':
     print('running main!')
-    import pyspark
     do_init = pyspark.context.SparkContext._do_init
     def my_init(self, conf, **kwargs):
       # java gateway must have been launched at this point.
