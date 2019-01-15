@@ -44,6 +44,7 @@ def my_init(self, conf, **kwargs):
         self._conf = conf
     else:
         print("*** _conf = new conf ***")
+        print("old conf = ", conf)
         
 
 if __name__ == '__main__':
