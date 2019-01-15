@@ -17,6 +17,7 @@ def etl_data():
         import os
         print(os.environ)
         print(os.environ["MASTER"])
+        print([x for x in os.environ.items() if "SPARK" in x[0]])
         print(pyspark.sql.SparkSession.builder._options)
         spark = pyspark.sql.SparkSession.builder.getOrCreate()
         print('spark context -> ', spark.sparkContext.master) 
