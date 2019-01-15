@@ -62,6 +62,7 @@ if __name__ == '__main__':
         self._conf = conf
       else:
         print("*** _conf = new conf ***")
+        from pyspark.context import SparkContext
         print("*** old conf =", conf.getAll(), "_jvm", SparkContext._jvm, "***")
       do_init(self, *args)
     pyspark.context.SparkContext._do_init = my_init
